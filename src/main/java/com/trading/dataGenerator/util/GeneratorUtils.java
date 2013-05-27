@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -178,5 +179,11 @@ public class GeneratorUtils {
 		return doc;
 	}
 	
+	/**
+	 * get UUID
+	 */
+	public static String getId() {
+		return UUID.randomUUID().toString();
+	}
 
 }

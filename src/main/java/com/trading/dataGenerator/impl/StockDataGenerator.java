@@ -1,12 +1,14 @@
 package com.trading.dataGenerator.impl;
 
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.trading.dataGenerator.DataGenerator;
+import com.trading.dataGenerator.dao.StockDAO;
 import com.trading.dataGenerator.domain.StockProfile;
 import com.trading.dataGenerator.simulator.StockPriceSimulator;
 import com.trading.dataGenerator.util.GeneratorUtils;
@@ -48,6 +50,8 @@ public abstract class StockDataGenerator implements DataGenerator {
 		private int jump;
 		private StockPriceSimulator simulator = new StockPriceSimulator();
 		private Random random = new Random(System.currentTimeMillis());
+		private StockDAO dao = new StockDAO();
+		private StockProfile profile = new StockProfile();
 		
 		public String getName() {
 			return name;
@@ -113,8 +117,11 @@ public abstract class StockDataGenerator implements DataGenerator {
 					Thread.sleep(random.nextInt(tick));
 					price = simulator.simulate(price, dividor, jump);
 					getStockFeed(name, price, symbol, ts, type, volume);
-					
-				} catch (InterruptedException e) {
+					BeanUtils.copyProperties(profile, this);
+					profile.setId(GeneratorUtils.getId());
+					profile.setTime(new Date());
+					dao.add(profile);
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}

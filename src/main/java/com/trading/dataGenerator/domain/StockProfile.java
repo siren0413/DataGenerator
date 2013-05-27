@@ -1,7 +1,11 @@
 package com.trading.dataGenerator.domain;
 
-public class StockProfile {
+import java.util.Date;
 
+public class StockProfile {
+	
+	private String id;
+	private Date time;
 	private String name;
 	private double price;
 	private String symbol;
@@ -89,6 +93,23 @@ public class StockProfile {
 
 	public void setJump(int jump) {
 		this.jump = jump;
+	}
+	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
 	}
 
 	@Override
