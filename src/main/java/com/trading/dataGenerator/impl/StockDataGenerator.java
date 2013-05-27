@@ -15,6 +15,9 @@ import com.trading.dataGenerator.util.GeneratorUtils;
 
 public abstract class StockDataGenerator implements DataGenerator {
 
+	private StockDAO dao = new StockDAO();
+	
+	
 	public void generate() {
 		try {
 			InputStream in = this.getClass().getClassLoader().getResourceAsStream("stockPortfolio.xml");
@@ -22,10 +25,18 @@ public abstract class StockDataGenerator implements DataGenerator {
 			List list = GeneratorUtils.XMLStockPaser(sb.toString());
 			for(Object obj:list) {
 				StockProfile sp = (StockProfile)obj;
-				System.out.println(sp.getName());
 				StockThread t = new StockThread();
+				StockProfile profile = dao.queryBySymbol(sp.getSymbol());
+				if(profile != null) {
+					sp.setPrice(profile.getPrice());
+					sp.setTs(profile.getTs());
+					sp.setVolume(profile.getVolume());
+				}else {
+					sp.setId(GeneratorUtils.getId());
+					sp.setTime(new Date());
+					dao.add(sp);
+				}
 				BeanUtils.copyProperties(t, sp);
-				System.out.println(t.getName());
 				Thread thread = new Thread(t);
 				thread.start();
 			}
@@ -120,7 +131,7 @@ public abstract class StockDataGenerator implements DataGenerator {
 					BeanUtils.copyProperties(profile, this);
 					profile.setId(GeneratorUtils.getId());
 					profile.setTime(new Date());
-					dao.add(profile);
+					dao.update(profile);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
