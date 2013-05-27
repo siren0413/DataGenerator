@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list version="1.0">
+	<meta>
+		<type>resource-list</type>
+	</meta>
+	<resources>
+		<resource classname="Quote">
+			<field name="name">Apple Inc.</field>
+			<field name="price">450</field>
+			<field name="symbol">AAPL</field>
+			<field name="ts">1369425604</field>
+			<field name="type">equity</field>
+			<field name="volume">9872377</field>
+			<field name="tick">200</field>
+			<field name="dividor">15000</field>
+			<field name="jump">1000</field>
+		</resource>
+		<resource classname="Quote">
+			<field name="name">Microsoft Corporation</field>
+			<field name="price">35</field>
+			<field name="symbol">MSFT</field>
+			<field name="ts">1369425601</field>
+			<field name="type">equity</field>
+			<field name="volume">33175804</field>
+			<field name="tick">500</field>
+			<field name="dividor">30000</field>
+			<field name="jump">5000</field>
+		</resource>
+		<resource classname="Quote">
+			<field name="name">Google Inc.</field>
+			<field name="price">873</field>
+			<field name="symbol">GOOG</field>
+			<field name="ts">1369425604</field>
+			<field name="type">equity</field>
+			<field name="volume">2296760</field>
+			<field name="tick">200</field>
+			<field name="dividor">10000</field>
+			<field name="jump">700</field>
+		</resource>
+	</resources>
+</list>
