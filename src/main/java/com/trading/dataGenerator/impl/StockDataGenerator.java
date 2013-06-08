@@ -17,7 +17,6 @@ public abstract class StockDataGenerator implements DataGenerator {
 
 	private StockDAO dao = new StockDAO();
 	
-	
 	public void generate() {
 		try {
 			InputStream in = this.getClass().getClassLoader().getResourceAsStream("stockPortfolio.xml");
