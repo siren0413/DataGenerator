@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+ http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+ http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+ http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+	<context:component-scan base-package="com.trading.dataGenerator"></context:component-scan>
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="classpath:database.properties">
+		</property>
+
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" scope="singleton">
+		<property name="driverClassName" value="${database.driverClassName}"></property>
+		<property name="url" value="${database.url}"></property>
+		<property name="username" value="${database.username}"></property>
+		<property name="password" value="${database.password}"></property>
+		<property name="initialSize" value="${database.initialSize}"></property>
+		<property name="maxActive" value="${database.maxActive}"></property>
+		<property name="maxIdle" value="${database.maxIdle}"></property>
+		<property name="minIdle" value="${database.minIdle}"></property>
+		<property name="maxWait" value="${database.maxWait}"></property>
+	</bean>
+
+	<bean id="stockDAO" class="com.trading.dataGenerator.dao.StockDAO" scope="prototype">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+
+
+
+
+
+
+
+</beans>
+ 
+ 

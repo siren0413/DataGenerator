@@ -1,24 +1,26 @@
 package com.trading.dataGenerator.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
+
+import javax.annotation.Resource;
+import javax.sql.DataSource;
 
 import com.trading.dataGenerator.dbcp.DBCP;
 import com.trading.dataGenerator.domain.StockProfile;
-import com.trading.dataGenerator.util.GeneratorUtils;
 
 public class StockDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
+	private DataSource dataSource = null;
 
 	public void add(StockProfile profile) {
 		try {
-			conn = DBCP.getConnection();
+			conn = dataSource.getConnection();
 			String sql = "insert into Stock values(?,?,?,?,?,?,?,?)";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, profile.getId());
@@ -34,14 +36,18 @@ public class StockDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBCP.releaseConnection(rs, stmt, conn);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
 
 	public void update(StockProfile profile) {
 		try {
-			conn = DBCP.getConnection();
+			conn = dataSource.getConnection();
 			String sql = "update Stock set tick_time=?, price=?, ts=?, volume=? where symbol=?";
 			stmt = conn.prepareStatement(sql);
 			stmt.setTimestamp(1, new Timestamp(profile.getTime().getTime()));
@@ -54,7 +60,11 @@ public class StockDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBCP.releaseConnection(rs, stmt, conn);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -66,7 +76,7 @@ public class StockDAO {
 		StockProfile profile = null;
 
 		try {
-			conn = DBCP.getConnection();
+			conn = dataSource.getConnection();
 			String sql = "select * from stock where symbol = ?";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, symbol);
@@ -85,9 +95,21 @@ public class StockDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBCP.releaseConnection(rs, stmt, conn);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
 		}
 
 		return profile;
 	}
+	
+	@Resource
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
+	
+	
 }

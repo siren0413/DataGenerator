@@ -3,7 +3,11 @@ package com.trading.dataGenerator;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.trading.dataGenerator.dao.StockDAO;
 import com.trading.dataGenerator.impl.StockDataGenerator;
 
 public class testStockDataGenerator {
@@ -21,9 +25,10 @@ public class testStockDataGenerator {
 
 	@Test
 	public void testGenerate() {
+		
 		sdg.generate();
 		try {
-			Thread.sleep(100000);
+			Thread.sleep(Long.MAX_VALUE);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

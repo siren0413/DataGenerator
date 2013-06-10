@@ -19,6 +19,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -28,7 +30,8 @@ import com.trading.dataGenerator.domain.StockProfile;
 
 
 public class GeneratorUtils {
-
+	
+	private static ApplicationContext context = new ClassPathXmlApplicationContext("spring_context.xml");
 	
 	// logger
 		private static Logger logger = null;
@@ -46,6 +49,12 @@ public class GeneratorUtils {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+		
+		
+		
+		public static ApplicationContext getApplicationContext() {
+			return context;
 		}
 	
 	/**

@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.trading.dataGenerator.DataGenerator;
@@ -15,7 +17,7 @@ import com.trading.dataGenerator.util.GeneratorUtils;
 
 public abstract class StockDataGenerator implements DataGenerator {
 
-	private StockDAO dao = new StockDAO();
+	private StockDAO dao = (StockDAO)GeneratorUtils.getApplicationContext().getBean("stockDAO");
 	
 	public void generate() {
 		try {
@@ -44,7 +46,7 @@ public abstract class StockDataGenerator implements DataGenerator {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public abstract void getStockFeed(String name, double price, String symbol, int ts, String type, int volume);
 	
 	
@@ -60,7 +62,7 @@ public abstract class StockDataGenerator implements DataGenerator {
 		private int jump;
 		private StockPriceSimulator simulator = new StockPriceSimulator();
 		private Random random = new Random(System.currentTimeMillis());
-		private StockDAO dao = new StockDAO();
+		private StockDAO dao = (StockDAO)GeneratorUtils.getApplicationContext().getBean("stockDAO");
 		private StockProfile profile = new StockProfile();
 		
 		public String getName() {

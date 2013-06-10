@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <Class name="com.trading.dataGenerator.DataGenerator" x="399" y="67">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.trading.dataGenerator.dao.StockDAO" x="713" y="328">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Communication destinationClassName="com.trading.dataGenerator.domain.StockProfile"/>
+        <Communication destinationClassName="com.trading.dataGenerator.dbcp.DBCP"/>
+    </Class>
+    <Class name="com.trading.dataGenerator.domain.StockProfile" x="545" y="586">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.trading.dataGenerator.impl.StockDataGenerator"
+        x="390" y="234">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.trading.dataGenerator.DataGenerator"/>
+        <Association
+            destinationClassName="com.trading.dataGenerator.dao.StockDAO"
+            endpointName="dao" kind="Simple"/>
+        <Communication destinationClassName="com.trading.dataGenerator.dao.StockDAO"/>
+        <Communication destinationClassName="com.trading.dataGenerator.domain.StockProfile"/>
+        <Communication destinationClassName="com.trading.dataGenerator.simulator.StockPriceSimulator"/>
+        <Communication destinationClassName="com.trading.dataGenerator.util.GeneratorUtils"/>
+    </Class>
+    <Class name="com.trading.dataGenerator.dbcp.DBCP" x="977" y="349">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class
+        name="com.trading.dataGenerator.simulator.StockPriceSimulator"
+        x="282" y="663">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.trading.dataGenerator.simulator.Simulator"/>
+    </Class>
+    <Class name="com.trading.dataGenerator.simulator.Simulator" x="297" y="576">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class
+        name="com.trading.dataGenerator.impl.StockDataGenerator.StockThread"
+        x="400" y="302">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association
+            destinationClassName="com.trading.dataGenerator.dao.StockDAO"
+            endpointName="dao" kind="Simple"/>
+        <Association
+            destinationClassName="com.trading.dataGenerator.simulator.StockPriceSimulator"
+            endpointName="simulator" kind="Simple"/>
+        <Association
+            destinationClassName="com.trading.dataGenerator.domain.StockProfile"
+            endpointName="profile" kind="Simple"/>
+        <Communication destinationClassName="com.trading.dataGenerator.impl.StockDataGenerator"/>
+        <Communication destinationClassName="com.trading.dataGenerator.domain.StockProfile"/>
+        <Communication destinationClassName="com.trading.dataGenerator.dao.StockDAO"/>
+        <Communication destinationClassName="com.trading.dataGenerator.simulator.StockPriceSimulator"/>
+    </Class>
+    <Class name="com.trading.dataGenerator.util.GeneratorUtils" x="762" y="671">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+</ClassDiagram>
